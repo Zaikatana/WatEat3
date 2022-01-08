@@ -1,22 +1,17 @@
 import React from "react";
+import { Cuisine } from "../main/Cuisine";
 import { ResultPage } from "./ResultPage";
 
 export const ResultPageContainer: React.FC<{
-    cuisine: string;
-    mode: boolean;
-    radius: string;
+  cuisines: Cuisine[];
+  mode: boolean;
+  radius: number;
 }> = (props) => {
-  const {
-    cuisine,
-    mode,
-    radius,
-  } = props;
+  const { cuisines, mode, radius } = props;
 
-  return (
-    <ResultPage
-      cuisine={cuisine}
-      mode={mode}
-      radius={radius}
-    />
-  );
+  const cuisineStrings: string[] = cuisines.map((cuisine) => {
+    return cuisine.cuisine_name;
+  });
+
+  return <ResultPage cuisines={cuisineStrings} mode={mode} radius={radius} />;
 };

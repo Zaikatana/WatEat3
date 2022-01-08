@@ -1,27 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Select from "react-dropdown-select";
+import { Cuisine, cuisines } from "./Cuisine";
 
 export const SearchForm: React.FC<{
-  setCuisineHandler(cuisine: string): void;
+  setCuisineHandler(cuisines: Cuisine[]): void;
   setModeHandler(): void;
-  setRadiusHandler(cuisine: string): void;
-  radius: string;
+  setRadiusHandler(radius: number): void;
+  radius: number;
 }> = (props) => {
   const { setCuisineHandler, setModeHandler, setRadiusHandler, radius } = props;
+  const [values, setValues] = useState<Cuisine[]>([]);
 
   return (
     <div className="row">
-      <div className="form-group input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Enter Cuisine..."
-          name="cuisine"
-          onChange={(e) => setCuisineHandler(e.target.value)}
+      <Select
+          multi
+          options={cuisines}
+          onChange={(values) => setValues(values)}
+          values={values}
+          labelField="cuisine_name"
+          valueField="cuisine_id"
+          closeOnSelect={true}
+          keepSelectedInList={false}
+          searchBy="cuisine_name"
         />
-
+      <div className="form-group input-group mb-3">
         <Link to="/result">
-          <button className="btn btn-primary" name="button" value="list">
+          <button
+            className="btn btn-primary"
+            name="button"
+            value="list"
+            onClick={() => setCuisineHandler(values)}
+          >
             Search
           </button>
         </Link>
@@ -50,7 +61,7 @@ export const SearchForm: React.FC<{
             max="50"
             step="5"
             value={radius}
-            onChange={(e) => setRadiusHandler(e.target.value)}
+            onChange={(e) => setRadiusHandler(parseInt(e.target.value))}
           />
         </div>
       </div>

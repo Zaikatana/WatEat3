@@ -1,11 +1,21 @@
 import React from "react";
 
 export const ResultPage: React.FC<{
-  cuisine: string;
+  cuisines: string[];
   mode: boolean;
-  radius: string;
+  radius: number;
 }> = (props) => {
-  const { cuisine, mode, radius } = props;
+  const { cuisines, mode, radius } = props;
+
+  const tableRows = cuisines.map((cuisine) => {
+    return (
+      <tr>
+        <td>{cuisine}</td>
+        <td>{mode ? "True" : "False"}</td>
+        <td>{radius}</td>
+      </tr>
+    );
+  });
 
   return (
     <div>
@@ -18,11 +28,7 @@ export const ResultPage: React.FC<{
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>{cuisine}</td>
-            <td>{mode ? "True" : "False"}</td>
-            <td>{radius}</td>
-          </tr>
+          {tableRows}
         </tbody>
       </table>
     </div>

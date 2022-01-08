@@ -1,11 +1,12 @@
 import React from "react";
+import { Cuisine } from "./Cuisine";
 import { SearchForm } from "./SearchForm";
 
 export const MainPage: React.FC<{
-  setCuisineHandler(cuisine: string): void;
+  setCuisineHandler(cuisines: Cuisine[]): void;
   setModeHandler(): void;
-  setRadiusHandler(cuisine: string): void;
-  radius: string;
+  setRadiusHandler(radius: number): void;
+  radius: number;
 }> = (props) => {
   const {
     setCuisineHandler,
