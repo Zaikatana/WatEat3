@@ -6,7 +6,7 @@ import { ResultPageContainer } from "./pages/result/ResultPageContainer";
 
 export const PageRouter: React.FC = () => {
   const [cuisines, setCuisines] = useState<Cuisine[]>([]);
-  const [mode, setMode] = useState(false);
+  const [mode, setMode] = useState<boolean>(false);
   const [radius, setRadius] = useState<number>(5);
 
   const setCuisineHandler = (cuisines: Cuisine[]) => {

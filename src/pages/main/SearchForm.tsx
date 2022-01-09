@@ -14,55 +14,66 @@ export const SearchForm: React.FC<{
 
   return (
     <div className="row">
-      <Select
-          multi
-          options={cuisines}
-          onChange={(values) => setValues(values)}
-          values={values}
-          labelField="cuisine_name"
-          valueField="cuisine_id"
-          closeOnSelect={true}
-          keepSelectedInList={false}
-          searchBy="cuisine_name"
-        />
-      <div className="form-group input-group mb-3">
-        <Link to="/result">
-          <button
-            className="btn btn-primary"
-            name="button"
-            value="list"
-            onClick={() => setCuisineHandler(values)}
-          >
-            Search
-          </button>
-        </Link>
-      </div>
-      <div className="row mb-3">
-        <div className="form-group form-check col">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            name="mode"
-            onChange={() => setModeHandler()}
-          />
-          <label className="form-check-label" htmlFor="mode">
-            Student Mode
-          </label>
+      <div className="form-group mb-3">
+        <div className="row">
+          <div className="col-8 col-md-10 col-xl-10">
+            <Select
+              multi
+              className="form-select"
+              placeholder="Select Cuisines..."
+              options={cuisines}
+              onChange={(values) => setValues(values)}
+              values={values}
+              labelField="cuisine_name"
+              valueField="cuisine_id"
+              closeOnSelect={true}
+              keepSelectedInList={false}
+              searchBy="cuisine_name"
+              dropdownHandle={false}
+            />
+          </div>
+          <div className="col-2 col-md-2 col-xl-2">
+            <Link to="/result">
+              <button
+                className="btn btn-primary"
+                name="button"
+                value="list"
+                onClick={() => setCuisineHandler(values)}
+              >
+                Search
+              </button>
+            </Link>
+          </div>
         </div>
-        <div className="form-group col">
-          <label htmlFor="radius" className="form-label">
-            Radius ({radius} km)
-          </label>
-          <input
-            className="form-range"
-            type="range"
-            name="radius"
-            min="5"
-            max="50"
-            step="5"
-            value={radius}
-            onChange={(e) => setRadiusHandler(parseInt(e.target.value))}
-          />
+      </div>
+      <div className="form-group mb-3">
+        <div className="row">
+          <div className="form-check col-5 col-md-2 col-xl-2 ms-3">
+            <input
+              type="checkbox"
+              className="form-check-input"
+              name="mode"
+              onChange={() => setModeHandler()}
+            />
+            <label className="form-check-label" htmlFor="mode">
+              Student Mode
+            </label>
+          </div>
+          <div className="col-6 col-md-9 col-xl-8">
+            <label htmlFor="radius" className="form-label">
+              Radius ({radius} km)
+            </label>
+            <input
+              className="form-range"
+              type="range"
+              name="radius"
+              min="5"
+              max="50"
+              step="5"
+              value={radius}
+              onChange={(e) => setRadiusHandler(parseInt(e.target.value))}
+            />
+          </div>
         </div>
       </div>
     </div>
