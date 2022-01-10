@@ -1,11 +1,14 @@
 import React from "react";
+import { ResultMap } from "./ResultMap";
 
 export const ResultPage: React.FC<{
   cuisines: string[];
   mode: boolean;
   radius: number;
+  lat: number;
+  lng: number;
 }> = (props) => {
-  const { cuisines, mode, radius } = props;
+  const { cuisines, mode, radius, lat, lng } = props;
 
   const tableRows = cuisines.map((cuisine) => {
     return (
@@ -31,6 +34,7 @@ export const ResultPage: React.FC<{
           {tableRows}
         </tbody>
       </table>
+      <ResultMap lat={lat} lng={lng} />
     </div>
   );
 };
