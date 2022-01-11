@@ -5,14 +5,13 @@ export const ResultPage: React.FC<{
   cuisines: string[];
   mode: boolean;
   radius: number;
-  lat: number;
-  lng: number;
+  pos: { lat: number; lng: number };
 }> = (props) => {
-  const { cuisines, mode, radius, lat, lng } = props;
+  const { cuisines, mode, radius, pos } = props;
 
   const tableRows = cuisines.map((cuisine) => {
     return (
-      <tr>
+      <tr key={cuisine}>
         <td>{cuisine}</td>
         <td>{mode ? "True" : "False"}</td>
         <td>{radius}</td>
@@ -30,11 +29,9 @@ export const ResultPage: React.FC<{
             <th scope="col">Radius (km)</th>
           </tr>
         </thead>
-        <tbody>
-          {tableRows}
-        </tbody>
+        <tbody>{tableRows}</tbody>
       </table>
-      <ResultMap lat={lat} lng={lng} />
+      <ResultMap pos={pos} />
     </div>
   );
 };

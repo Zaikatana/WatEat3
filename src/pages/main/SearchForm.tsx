@@ -14,9 +14,9 @@ export const SearchForm: React.FC<{
 
   return (
     <div className="row">
-      <div className="form-group mb-3">
-        <div className="row">
-          <div className="col-8 col-md-10 col-xl-10">
+      <form>
+        <div className="row mb-3 d-flex align-items-center">
+          <div className="col-sm-10 col-10">
             <Select
               multi
               className="form-select"
@@ -32,7 +32,7 @@ export const SearchForm: React.FC<{
               dropdownHandle={false}
             />
           </div>
-          <div className="col-2 col-md-2 col-xl-2">
+          <div className="col-sm-2 col-2">
             <Link to="/result">
               <button
                 className="btn btn-primary"
@@ -45,21 +45,8 @@ export const SearchForm: React.FC<{
             </Link>
           </div>
         </div>
-      </div>
-      <div className="form-group mb-3">
-        <div className="row">
-          <div className="form-check col-5 col-md-2 col-xl-2 ms-3">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              name="mode"
-              onChange={() => setModeHandler()}
-            />
-            <label className="form-check-label" htmlFor="mode">
-              Student Mode
-            </label>
-          </div>
-          <div className="col-6 col-md-9 col-xl-8">
+        <div className="row mb-3 d-flex align-items-center">
+          <div className="col-sm-10 col-10">
             <label htmlFor="radius" className="form-label">
               Radius ({radius} km)
             </label>
@@ -67,6 +54,7 @@ export const SearchForm: React.FC<{
               className="form-range"
               type="range"
               name="radius"
+              id="radius"
               min="5"
               max="50"
               step="5"
@@ -74,8 +62,20 @@ export const SearchForm: React.FC<{
               onChange={(e) => setRadiusHandler(parseInt(e.target.value))}
             />
           </div>
+          <div className="form-check col-sm-2 col-2">
+            <label className="form-check-label" htmlFor="mode">
+              Student Mode
+            </label>
+            <input
+              type="checkbox"
+              className="form-check-input"
+              id="mode"
+              name="mode"
+              onChange={() => setModeHandler()}
+            />
+          </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

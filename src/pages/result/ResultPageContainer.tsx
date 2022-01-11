@@ -8,14 +8,11 @@ export const ResultPageContainer: React.FC<{
   radius: number;
 }> = (props) => {
   const { cuisines, mode, radius } = props;
-
-  const [lat, setLat] = useState(0);
-  const [lng, setLng] = useState(0);
+  const [pos, setPos] = useState<{lat: number, lng: number}>({lat: 0, lng: 0});
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
+    navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
+        setPos({lat: position.coords.latitude, lng: position.coords.longitude});
     });
   });
 
@@ -23,5 +20,5 @@ export const ResultPageContainer: React.FC<{
     return cuisine.cuisine_name;
   });
 
-  return <ResultPage cuisines={cuisineStrings} mode={mode} radius={radius} lng={lng} lat={lat} />;
+  return <ResultPage cuisines={cuisineStrings} mode={mode} radius={radius} pos={pos} />;
 };

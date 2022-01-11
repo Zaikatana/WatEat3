@@ -6,9 +6,10 @@ export const App: React.FC<{}> = (props) => {
     <div className="App">
       <div className="container align-item-center">
         <div className="row text-center">
-          <h2>
-            WatEat? <small className="text-muted">v1</small>
-          </h2>
+          <a className="navbar-brand mb-3" href="/">
+            <span className="h1">WatEat?</span>
+            <small className="text-muted">v1</small>
+          </a>
         </div>
         <PageRouter />
       </div>
