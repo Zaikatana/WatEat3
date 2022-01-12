@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+const { REACT_APP_KEY } = process.env;
 
 export const ResultMap: React.FC<{pos: { lat: number; lng: number }}> = (props) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyB_pDxzfhiV1J2rHKZAu1RJiZKrY8Hu1bI",
+    googleMapsApiKey: REACT_APP_KEY ? REACT_APP_KEY : '',
   });
 
   const [map, setMap] = useState(null);
