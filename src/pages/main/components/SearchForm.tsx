@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Select from "react-dropdown-select";
-import { Cuisine, cuisines } from "./Cuisine";
+import { Cuisine, cuisines } from "../Cuisine";
 
 type SearchFormProps = {
   setCuisineHandler(cuisines: Cuisine[]): void;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Cuisine } from "./Cuisine";
-import { SearchForm } from "./SearchForm";
+import { SearchForm } from "./components/SearchForm";
 
 type MainPageProps = {
   setCuisineHandler(cuisines: Cuisine[]): void;

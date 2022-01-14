@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Cuisine } from "../../main/Cuisine";
-import { ResultPage } from "../ResultPage";
+import { Cuisine } from "../main/Cuisine";
+import { ResultPage } from "./ResultPage";
 
 type ResultPageContainerProps = {
   cuisines: Cuisine[];

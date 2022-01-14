@@ -1,5 +1,5 @@
 import React from "react";
-import { ResultMap } from "./ResultMap";
+import { ResultMap } from "./components/ResultMap";
 
 type ResultPageProps = {
   cuisines: string[];
