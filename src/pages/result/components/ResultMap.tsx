@@ -28,7 +28,7 @@ export const ResultMap: React.FC<ResultMapProps> = (props) => {
   }, []);
 
   const containerStyle = {
-    width: "400px",
+    width: "100%",
     height: "400px",
   };
 

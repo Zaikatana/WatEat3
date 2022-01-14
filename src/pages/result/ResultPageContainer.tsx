@@ -20,13 +20,17 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position: GeolocationPosition) => {
-        setPos({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
+        updateMapCenter(position.coords.latitude, position.coords.longitude)
       }
     );
   });
+
+  const updateMapCenter = (lat: number, lng: number) => {
+    setPos({
+      lat,
+      lng,
+    });
+  };
 
   const cuisineStrings: string[] = cuisines.map((cuisine) => {
     return cuisine.cuisine_name;
@@ -38,6 +42,7 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
       mode={mode}
       radius={radius}
       pos={pos}
+      updateMapCenter={updateMapCenter}
     />
   );
 };

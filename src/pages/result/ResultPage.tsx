@@ -1,4 +1,6 @@
 import React from "react";
+import { testResponse } from "../../services/types/business.type";
+import { ResultCard } from "./components/ResultCard";
 import { ResultMap } from "./components/ResultMap";
 
 type ResultPageProps = {
@@ -6,10 +8,11 @@ type ResultPageProps = {
   mode: boolean;
   radius: number;
   pos: { lat: number; lng: number };
+  updateMapCenter: (lat: number, lng: number) => void;
 };
 
 export const ResultPage: React.FC<ResultPageProps> = (props) => {
-  const { cuisines, mode, radius, pos } = props;
+  const { cuisines, mode, radius, pos, updateMapCenter } = props;
 
   const tableRows = cuisines.map((cuisine) => {
     return (
@@ -18,6 +21,13 @@ export const ResultPage: React.FC<ResultPageProps> = (props) => {
         <td>{mode ? "True" : "False"}</td>
         <td>{radius}</td>
       </tr>
+    );
+  });
+
+  const businesses = testResponse;
+  const cards = businesses.businesses.map((business) => {
+    return (
+      <ResultCard business={business} updateMapCenter={updateMapCenter} key={business.id}/>
     );
   });
 
@@ -34,6 +44,7 @@ export const ResultPage: React.FC<ResultPageProps> = (props) => {
         <tbody>{tableRows}</tbody>
       </table>
       <ResultMap pos={pos} />
+      {cards}
     </div>
   );
 };
