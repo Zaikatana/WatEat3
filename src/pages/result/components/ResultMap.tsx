@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
 const { REACT_APP_KEY } = process.env;
 
-export const ResultMap: React.FC<{pos: { lat: number; lng: number }}> = (props) => {
+type ResultMapProps = {
+  pos: { lat: number; lng: number };
+};
+
+export const ResultMap: React.FC<ResultMapProps> = (props) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: REACT_APP_KEY ? REACT_APP_KEY : '',
+    googleMapsApiKey: REACT_APP_KEY ? REACT_APP_KEY : "",
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [map, setMap] = useState(null);
 
   const { pos } = props;
@@ -35,7 +40,7 @@ export const ResultMap: React.FC<{pos: { lat: number; lng: number }}> = (props) 
       onLoad={onLoad}
       onUnmount={onUnmount}
     >
-        <Marker position={pos} />
+      <Marker position={pos} />
     </GoogleMap>
   ) : (
     <></>

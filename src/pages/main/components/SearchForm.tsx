@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import Select from "react-dropdown-select";
 import { Cuisine, cuisines } from "./Cuisine";
 
-export const SearchForm: React.FC<{
+type SearchFormProps = {
   setCuisineHandler(cuisines: Cuisine[]): void;
   setModeHandler(): void;
   setRadiusHandler(radius: number): void;
   radius: number;
-}> = (props) => {
+};
+
+export const SearchForm: React.FC<SearchFormProps> = (props) => {
   const { setCuisineHandler, setModeHandler, setRadiusHandler, radius } = props;
   const [values, setValues] = useState<Cuisine[]>([]);
 

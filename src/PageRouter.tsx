@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Cuisine } from "./pages/main/Cuisine";
 import { MainPageContainer } from "./pages/main/MainPageContainer";
-import { ResultPageContainer } from "./pages/result/ResultPageContainer";
+import { ResultPageContainer } from "./pages/result/components/ResultPageContainer";
 
 export const PageRouter: React.FC = () => {
   const [cuisines, setCuisines] = useState<Cuisine[]>([]);

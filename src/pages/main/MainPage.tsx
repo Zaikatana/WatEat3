@@ -2,18 +2,15 @@ import React from "react";
 import { Cuisine } from "./Cuisine";
 import { SearchForm } from "./SearchForm";
 
-export const MainPage: React.FC<{
+type MainPageProps = {
   setCuisineHandler(cuisines: Cuisine[]): void;
   setModeHandler(): void;
   setRadiusHandler(radius: number): void;
   radius: number;
-}> = (props) => {
-  const {
-    setCuisineHandler,
-    setModeHandler,
-    setRadiusHandler,
-    radius,
-  } = props;
+};
+
+export const MainPage: React.FC<MainPageProps> = (props) => {
+  const { setCuisineHandler, setModeHandler, setRadiusHandler, radius } = props;
 
   return (
     <SearchForm

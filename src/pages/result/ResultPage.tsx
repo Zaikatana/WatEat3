@@ -1,12 +1,14 @@
 import React from "react";
 import { ResultMap } from "./ResultMap";
 
-export const ResultPage: React.FC<{
+type ResultPageProps = {
   cuisines: string[];
   mode: boolean;
   radius: number;
   pos: { lat: number; lng: number };
-}> = (props) => {
+};
+
+export const ResultPage: React.FC<ResultPageProps> = (props) => {
   const { cuisines, mode, radius, pos } = props;
 
   const tableRows = cuisines.map((cuisine) => {
