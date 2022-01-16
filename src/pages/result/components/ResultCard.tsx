@@ -4,10 +4,11 @@ import { Business } from "../../../services/types/business.type";
 type ResultCardProps = {
   business: Business;
   updateMapCenter: (lat: number, lng: number) => void;
+  swipeCard: () => void;
 };
 
 export const ResultCard: React.FC<ResultCardProps> = (props) => {
-  const { business, updateMapCenter } = props;
+  const { business, updateMapCenter, swipeCard } = props;
   const cardCategories = business.categories.map((category) => {
     return category.title;
   });
@@ -60,7 +61,9 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
           >
             Go on map
           </button>
-          <button className="btn btn-primary">Pass</button>
+          <button className="btn btn-primary" onClick={() => swipeCard()}>
+            Pass
+          </button>
         </ul>
       </div>
     </div>

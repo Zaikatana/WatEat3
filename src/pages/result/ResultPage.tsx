@@ -1,5 +1,5 @@
 import React from "react";
-import { testResponse } from "../../services/types/business.type";
+import { Business } from "../../services/types/business.type";
 import { ResultCard } from "./components/ResultCard";
 import { ResultMap } from "./components/ResultMap";
 
@@ -8,11 +8,21 @@ type ResultPageProps = {
   mode: boolean;
   radius: number;
   pos: { lat: number; lng: number };
+  businesses: Business[];
   updateMapCenter: (lat: number, lng: number) => void;
+  swipeCard: () => void;
 };
 
 export const ResultPage: React.FC<ResultPageProps> = (props) => {
-  const { cuisines, mode, radius, pos, updateMapCenter } = props;
+  const {
+    cuisines,
+    mode,
+    radius,
+    pos,
+    businesses,
+    updateMapCenter,
+    swipeCard,
+  } = props;
 
   const tableRows = cuisines.map((cuisine) => {
     return (
@@ -24,12 +34,17 @@ export const ResultPage: React.FC<ResultPageProps> = (props) => {
     );
   });
 
-  const businesses = testResponse;
-  const cards = businesses.businesses.map((business) => {
-    return (
-      <ResultCard business={business} updateMapCenter={updateMapCenter} key={business.id}/>
+  const currCard =
+    businesses.length > 0 ? (
+      <ResultCard
+        business={businesses[0]}
+        updateMapCenter={updateMapCenter}
+        swipeCard={swipeCard}
+        key={businesses[0].id}
+      />
+    ) : (
+      <></>
     );
-  });
 
   return (
     <div>
@@ -44,7 +59,7 @@ export const ResultPage: React.FC<ResultPageProps> = (props) => {
         <tbody>{tableRows}</tbody>
       </table>
       <ResultMap pos={pos} />
-      {cards}
+      {currCard}
     </div>
   );
 };
