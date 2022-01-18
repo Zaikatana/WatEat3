@@ -4,14 +4,14 @@ import Select from "react-dropdown-select";
 import { Cuisine, cuisines } from "../Cuisine";
 
 type SearchFormProps = {
-  setCuisineHandler(cuisines: Cuisine[]): void;
+  formSubmitHandler(cuisines: Cuisine[]): void;
   setModeHandler(): void;
   setRadiusHandler(radius: number): void;
   radius: number;
 };
 
 export const SearchForm: React.FC<SearchFormProps> = (props) => {
-  const { setCuisineHandler, setModeHandler, setRadiusHandler, radius } = props;
+  const { formSubmitHandler, setModeHandler, setRadiusHandler, radius } = props;
   const [values, setValues] = useState<Cuisine[]>([]);
 
   return (
@@ -40,7 +40,7 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
                 className="btn btn-primary"
                 name="button"
                 value="list"
-                onClick={() => setCuisineHandler(values)}
+                onClick={() => formSubmitHandler(values)}
               >
                 Search
               </button>

@@ -1,29 +1,26 @@
 import React, { useState } from "react";
-import { Business, testResponse } from "../../services/types/business.type";
-import { Cuisine } from "../main/Cuisine";
+import { Business } from "../../services/types/business.type";
 import { ResultPage } from "./ResultPage";
 
 type ResultPageContainerProps = {
-  cuisines: Cuisine[];
-  mode: boolean;
-  radius: number;
+  businessList: Business[];
 };
 
 export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
   props
 ) => {
-  const { cuisines, mode, radius } = props;
-  const businesses = testResponse.businesses;
-  const { latitude, longitude } = businesses[0].coordinates;
+  const { businessList } = props;
+  const { latitude, longitude } = businessList[0].coordinates;
 
-  const [pos, setPos] = useState<{ lat: number; lng: number }>({
+  const [center, setCenter] = useState<{ lat: number; lng: number }>({
     lat: latitude,
     lng: longitude,
   });
-  const [cards, setCards] = useState<Business[]>(businesses);
+  // TODO: Get Rid of This
+  const [cards, setCards] = useState<Business[]>(businessList);
 
   const updateMapCenter = (lat: number, lng: number) => {
-    setPos({
+    setCenter({
       lat,
       lng,
     });
@@ -41,16 +38,9 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
     }
   };
 
-  const cuisineStrings: string[] = cuisines.map((cuisine) => {
-    return cuisine.cuisine_name;
-  });
-
   return (
     <ResultPage
-      cuisines={cuisineStrings}
-      mode={mode}
-      radius={radius}
-      pos={pos}
+      center={center}
       businesses={cards}
       updateMapCenter={updateMapCenter}
       swipeCard={swipeCard}

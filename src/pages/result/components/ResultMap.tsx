@@ -3,7 +3,7 @@ import { GoogleMap, Marker, LoadScript } from "@react-google-maps/api";
 const { REACT_APP_KEY } = process.env;
 
 type ResultMapProps = {
-  pos: { lat: number; lng: number };
+  center: { lat: number; lng: number };
 };
 
 export const ResultMap: React.FC<ResultMapProps> = (props) => {
@@ -11,7 +11,7 @@ export const ResultMap: React.FC<ResultMapProps> = (props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [map, setMap] = useState(null);
 
-  const { pos } = props;
+  const { center } = props;
 
   const containerStyle = {
     width: "100%",
@@ -22,10 +22,10 @@ export const ResultMap: React.FC<ResultMapProps> = (props) => {
     <LoadScript googleMapsApiKey={REACT_APP_KEY ? REACT_APP_KEY : ""}>
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={pos}
+        center={center}
         zoom={18}
       >
-        <Marker position={pos} />
+        <Marker position={center} />
       </GoogleMap>
     </LoadScript>
   );

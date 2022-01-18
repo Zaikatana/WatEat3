@@ -1,25 +1,16 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Cuisine } from "./pages/main/Cuisine";
 import { MainPageContainer } from "./pages/main/MainPageContainer";
 import { ResultPageContainer } from "./pages/result/ResultPageContainer";
+import { Business, testResponse } from "./services/types/business.type";
 
 export const PageRouter: React.FC = () => {
-  const [cuisines, setCuisines] = useState<Cuisine[]>([]);
-  const [mode, setMode] = useState<boolean>(false);
-  const [radius, setRadius] = useState<number>(5);
+  const businesses = testResponse.businesses;
+  const [businessList, setBusinessList] = useState<Business[]>(businesses);
 
-  const setCuisineHandler = (cuisines: Cuisine[]) => {
-    setCuisines(cuisines);
-  };
-
-  const setModeHandler = () => {
-    setMode(!mode);
-  };
-
-  const setRadiusHandler = (radius: number) => {
-    setRadius(radius);
-  };
+  const setBusinessListHandler = (businessList: Business[]) => {
+    setBusinessList(businessList);
+  }
 
   return (
     <Router>
@@ -28,10 +19,7 @@ export const PageRouter: React.FC = () => {
           path="/"
           element={
             <MainPageContainer
-              setCuisineHandler={setCuisineHandler}
-              setModeHandler={setModeHandler}
-              setRadiusHandler={setRadiusHandler}
-              radius={radius}
+              setBusinessListHandler={setBusinessListHandler}
             />
           }
         />
@@ -39,9 +27,7 @@ export const PageRouter: React.FC = () => {
           path="/result"
           element={
             <ResultPageContainer
-              cuisines={cuisines}
-              mode={mode}
-              radius={radius}
+              businessList={businessList}
             />
           }
         />
