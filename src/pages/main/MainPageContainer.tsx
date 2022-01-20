@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosResponse } from "axios";
+import { AxiosInstance } from "axios";
 import React, { useEffect, useState } from "react";
 import { Business } from "../../services/types/business.type";
 import { YelpService } from "../../services/YelpService";
@@ -7,10 +7,11 @@ import { MainPage } from "./MainPage";
 
 type MainPageContainerProps = {
   setBusinessListHandler: (businessList: Business[]) => void;
+  setIsLoadingHandler: (bool: boolean) => void;
 };
 
 export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
-  const { setBusinessListHandler } = props;
+  const { setBusinessListHandler, setIsLoadingHandler } = props;
   const yelpService: AxiosInstance = YelpService.createYelpBusinessInstance();
   const [mode, setMode] = useState<boolean>(false);
   const [radius, setRadius] = useState<number>(5);
@@ -38,7 +39,8 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
   };
 
   const formSubmitHandler = async (cuisines: Cuisine[]) => {
-    let response: AxiosResponse = await yelpService.get("/search", {
+    setIsLoadingHandler(true);
+    yelpService.get("/search", {
       params: {
         latitude: currPos.lat,
         longitude: currPos.lng,
@@ -49,10 +51,10 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
         price: mode ? "1, 2" : "1, 2, 3, 4",
         open_now: true,
       },
+    }).then((response) => {
+      setBusinessListHandler(response.data.businesses as Business[]);
+      setIsLoadingHandler(false);
     });
-    console.log(response.data.businesses);
-    // TODO: Implement Loader to wait for this to complete
-    setBusinessListHandler(response.data.businesses);
   };
 
   return (

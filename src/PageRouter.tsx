@@ -2,14 +2,18 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { MainPageContainer } from "./pages/main/MainPageContainer";
 import { ResultPageContainer } from "./pages/result/ResultPageContainer";
-import { Business, testResponse } from "./services/types/business.type";
+import { Business } from "./services/types/business.type";
 
 export const PageRouter: React.FC = () => {
-  const businesses = testResponse.businesses;
-  const [businessList, setBusinessList] = useState<Business[]>(businesses);
+  const [businessList, setBusinessList] = useState<Business[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const setBusinessListHandler = (businessList: Business[]) => {
-    setBusinessList(businessList);
+    setBusinessList([...businessList]);
+  }
+
+  const setIsLoadingHandler = (bool: boolean) => {
+    setIsLoading(bool);
   }
 
   return (
@@ -20,6 +24,7 @@ export const PageRouter: React.FC = () => {
           element={
             <MainPageContainer
               setBusinessListHandler={setBusinessListHandler}
+              setIsLoadingHandler={setIsLoadingHandler}
             />
           }
         />
@@ -28,6 +33,7 @@ export const PageRouter: React.FC = () => {
           element={
             <ResultPageContainer
               businessList={businessList}
+              isLoading={isLoading}
             />
           }
         />

@@ -14,18 +14,19 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
   });
 
   const imageCss: CSSProperties = {
-    width: "18rem",
+    width: "100%",
     height: "11.25rem",
     objectFit: "contain",
     backgroundColor: "grey",
   };
 
   const cardCss: CSSProperties = {
-    width: "18rem",
+    width: "100%",
+    height: "100%",
   };
 
   return (
-    <div className="card mb-2" style={cardCss}>
+    <div className="card" style={cardCss}>
       <img
         src={business.image_url}
         className="card-img-top"

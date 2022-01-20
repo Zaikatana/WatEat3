@@ -1,23 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Business } from "../../services/types/business.type";
 import { ResultPage } from "./ResultPage";
 
 type ResultPageContainerProps = {
   businessList: Business[];
+  isLoading: boolean;
 };
 
 export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
   props
 ) => {
-  const { businessList } = props;
-  const { latitude, longitude } = businessList[0].coordinates;
-
+  const { businessList, isLoading } = props;
   const [center, setCenter] = useState<{ lat: number; lng: number }>({
-    lat: latitude,
-    lng: longitude,
+    lat: 0,
+    lng: 0,
   });
-  // TODO: Get Rid of This
   const [cards, setCards] = useState<Business[]>(businessList);
+  
+  useEffect(() => {
+    setCards([...businessList]);
+    const { latitude, longitude } =
+      businessList.length > 0
+        ? businessList[0].coordinates
+        : { latitude: 0, longitude: 0 };
+    setCenter({
+      lat: latitude,
+      lng: longitude,
+    });
+  }, [businessList]);
 
   const updateMapCenter = (lat: number, lng: number) => {
     setCenter({
@@ -42,6 +52,7 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
     <ResultPage
       center={center}
       businesses={cards}
+      isLoading={isLoading}
       updateMapCenter={updateMapCenter}
       swipeCard={swipeCard}
     />

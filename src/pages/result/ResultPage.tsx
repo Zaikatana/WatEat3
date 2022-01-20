@@ -8,12 +8,12 @@ type ResultPageProps = {
   businesses: Business[];
   updateMapCenter: (lat: number, lng: number) => void;
   swipeCard: () => void;
+  isLoading: boolean;
 };
 
 export const ResultPage: React.FC<ResultPageProps> = (props) => {
-  const { center, businesses, updateMapCenter, swipeCard } = props;
-  console.log(businesses);
-  
+  const { center, businesses, updateMapCenter, swipeCard, isLoading } = props;
+
   const currCard =
     businesses.length > 0 ? (
       <ResultCard
@@ -27,9 +27,19 @@ export const ResultPage: React.FC<ResultPageProps> = (props) => {
     );
 
   return (
-    <div>
-      <ResultMap center={center} />
-      {currCard}
+    <div className="row">
+      <div className="col-4">
+        {isLoading ? (
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          currCard
+        )}
+      </div>
+      <div className="col-8">
+        <ResultMap center={center} />
+      </div>
     </div>
   );
 };
