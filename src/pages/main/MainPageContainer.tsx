@@ -14,7 +14,7 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
   const { setBusinessListHandler, setIsLoadingHandler } = props;
   const yelpService: AxiosInstance = YelpService.createYelpBusinessInstance();
   const [mode, setMode] = useState<boolean>(false);
-  const [radius, setRadius] = useState<number>(5);
+  const [radius, setRadius] = useState<number>(1);
   const [currPos, setCurrPos] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,

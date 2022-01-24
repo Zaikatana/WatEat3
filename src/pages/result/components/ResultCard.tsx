@@ -1,21 +1,30 @@
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBCardSubTitle,
+  MDBCardTitle,
+  MDBTable,
+  MDBTableBody,
+} from "mdb-react-ui-kit";
 import React, { CSSProperties } from "react";
 import { Business } from "../../../services/types/business.type";
 
 type ResultCardProps = {
   business: Business;
-  updateMapCenter: (lat: number, lng: number) => void;
   swipeCard: () => void;
 };
 
 export const ResultCard: React.FC<ResultCardProps> = (props) => {
-  const { business, updateMapCenter, swipeCard } = props;
+  const { business, swipeCard } = props;
   const cardCategories = business.categories.map((category) => {
     return category.title;
   });
 
   const imageCss: CSSProperties = {
     width: "100%",
-    height: "11.25rem",
+    height: "400px",
     objectFit: "contain",
     backgroundColor: "grey",
   };
@@ -26,47 +35,42 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
   };
 
   return (
-    <div className="card" style={cardCss}>
-      <img
+    <MDBCard style={cardCss}>
+      <MDBCardImage
         src={business.image_url}
-        className="card-img-top"
+        position="top"
         alt="..."
         style={imageCss}
       />
-      <div className="card-body">
-        <h5 className="card-title">{business.name}</h5>
-        <h6 className="card-subtitle mb-2 text-muted">
+      <MDBCardBody>
+        <MDBCardTitle>{business.name}</MDBCardTitle>
+        <MDBCardSubTitle>
           {business.location.display_address.join(", ")}
-        </h6>
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <b>Distance: </b>
-            {Math.ceil(business.distance)} away
-          </li>
-          <li className="list-group-item">
-            <b>Rating: </b>
-            {business.rating}
-          </li>
-          <li className="list-group-item">
-            <b>Cuisine: </b>
-            {cardCategories.join(", ")}
-          </li>
-          <button
-            className="btn btn-primary mb-2"
-            onClick={() =>
-              updateMapCenter(
-                business.coordinates.latitude,
-                business.coordinates.longitude
-              )
-            }
-          >
-            Go on map
-          </button>
-          <button className="btn btn-primary" onClick={() => swipeCard()}>
-            Pass
-          </button>
-        </ul>
-      </div>
-    </div>
+        </MDBCardSubTitle>
+        <MDBTable borderless striped>
+          <MDBTableBody>
+            <tr>
+              <th scope="row">Distance</th>
+              <td>{(business.distance/1000).toFixed(2)}km away</td>
+            </tr>
+            <tr>
+              <th scope="row">Rating</th>
+              <td>{business.rating}</td>
+            </tr>
+            <tr>
+              <th scope="row">Price</th>
+              <td>{business.price}</td>
+            </tr>
+            <tr>
+              <th scope="row">Cuisine</th>
+              <td>{cardCategories.join(", ")}</td>
+            </tr>
+          </MDBTableBody>
+        </MDBTable>
+        <MDBBtn onClick={() => swipeCard()} className="float-end">
+          Pass
+        </MDBBtn>
+      </MDBCardBody>
+    </MDBCard>
   );
 };

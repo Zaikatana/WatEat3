@@ -1,4 +1,5 @@
-import React from "react";
+import { MDBCol, MDBContainer, MDBRow, MDBSpinner } from "mdb-react-ui-kit";
+import React, { CSSProperties } from "react";
 import { Business } from "../../services/types/business.type";
 import { ResultCard } from "./components/ResultCard";
 import { ResultMap } from "./components/ResultMap";
@@ -6,19 +7,17 @@ import { ResultMap } from "./components/ResultMap";
 type ResultPageProps = {
   center: { lat: number; lng: number };
   businesses: Business[];
-  updateMapCenter: (lat: number, lng: number) => void;
   swipeCard: () => void;
   isLoading: boolean;
 };
 
 export const ResultPage: React.FC<ResultPageProps> = (props) => {
-  const { center, businesses, updateMapCenter, swipeCard, isLoading } = props;
+  const { center, businesses, swipeCard, isLoading } = props;
 
   const currCard =
     businesses.length > 0 ? (
       <ResultCard
         business={businesses[0]}
-        updateMapCenter={updateMapCenter}
         swipeCard={swipeCard}
         key={businesses[0].id}
       />
@@ -26,20 +25,33 @@ export const ResultPage: React.FC<ResultPageProps> = (props) => {
       <></>
     );
 
+  const containerCss: CSSProperties = {
+    minHeight: "100%",
+    height: "94vh",
+    minWidth: "100%",
+  };
+
   return (
-    <div className="row">
-      <div className="col-4">
-        {isLoading ? (
-          <div className="spinner-border" role="status">
+    <MDBContainer fluid>
+      {isLoading ? (
+        <div
+          className="border d-flex align-items-center justify-content-center"
+          style={containerCss}
+        >
+          <MDBSpinner grow>
             <span className="visually-hidden">Loading...</span>
-          </div>
-        ) : (
-          currCard
-        )}
-      </div>
-      <div className="col-8">
-        <ResultMap center={center} />
-      </div>
-    </div>
+          </MDBSpinner>
+        </div>
+      ) : (
+        <div style={containerCss}>
+          <MDBRow>
+            <MDBCol md="3">{currCard}</MDBCol>
+            <MDBCol md="9">
+              <ResultMap center={center} />
+            </MDBCol>
+          </MDBRow>
+        </div>
+      )}
+    </MDBContainer>
   );
 };

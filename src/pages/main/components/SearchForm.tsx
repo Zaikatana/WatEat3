@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Select from "react-dropdown-select";
 import { Cuisine, cuisines } from "../Cuisine";
+import {
+  MDBBtn,
+  MDBCheckbox,
+  MDBCol,
+  MDBRange,
+  MDBRow,
+} from "mdb-react-ui-kit";
 
 type SearchFormProps = {
   formSubmitHandler(cuisines: Cuisine[]): void;
@@ -15,13 +22,12 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
   const [values, setValues] = useState<Cuisine[]>([]);
 
   return (
-    <div className="row">
+    <>
       <form>
-        <div className="row mb-3 d-flex align-items-center">
-          <div className="col-sm-10 col-10">
+        <MDBRow className="mb-3">
+          <MDBCol>
             <Select
               multi
-              className="form-select"
               placeholder="Select Cuisines..."
               options={cuisines}
               onChange={(values) => setValues(values)}
@@ -33,51 +39,44 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
               searchBy="cuisine_name"
               dropdownHandle={false}
             />
-          </div>
-          <div className="col-sm-2 col-2">
+          </MDBCol>
+        </MDBRow>
+        <MDBRow className="mb-3">
+          <MDBCol>
+            <MDBRange
+              value={radius}
+              min="1"
+              max="5"
+              step="1"
+              id="radius"
+              label={`Radius (${radius} km)`}
+              onChange={(e: any) => setRadiusHandler(parseInt(e.target.value))}
+            />
+          </MDBCol>
+        </MDBRow>
+        <MDBRow className="mb-3">
+          <MDBCol>
+            <MDBCheckbox
+              name="mode"
+              id="mode"
+              onChange={() => setModeHandler()}
+              label="Student Mode"
+            />
+          </MDBCol>
+          <MDBCol>
             <Link to="/result">
-              <button
-                className="btn btn-primary"
+              <MDBBtn
                 name="button"
+                className="float-end"
                 value="list"
                 onClick={() => formSubmitHandler(values)}
               >
                 Search
-              </button>
+              </MDBBtn>
             </Link>
-          </div>
-        </div>
-        <div className="row mb-3 d-flex align-items-center">
-          <div className="col-sm-10 col-10">
-            <label htmlFor="radius" className="form-label">
-              Radius ({radius} km)
-            </label>
-            <input
-              className="form-range"
-              type="range"
-              name="radius"
-              id="radius"
-              min="5"
-              max="50"
-              step="5"
-              value={radius}
-              onChange={(e) => setRadiusHandler(parseInt(e.target.value))}
-            />
-          </div>
-          <div className="form-check col-sm-2 col-2">
-            <label className="form-check-label" htmlFor="mode">
-              Student Mode
-            </label>
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="mode"
-              name="mode"
-              onChange={() => setModeHandler()}
-            />
-          </div>
-        </div>
+          </MDBCol>
+        </MDBRow>
       </form>
-    </div>
+    </>
   );
 };

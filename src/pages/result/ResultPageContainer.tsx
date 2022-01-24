@@ -53,7 +53,6 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
       center={center}
       businesses={cards}
       isLoading={isLoading}
-      updateMapCenter={updateMapCenter}
       swipeCard={swipeCard}
     />
   );
