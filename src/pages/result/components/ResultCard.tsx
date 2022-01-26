@@ -24,14 +24,13 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
 
   const imageCss: CSSProperties = {
     width: "100%",
-    height: "400px",
+    height: "300px",
     objectFit: "contain",
     backgroundColor: "grey",
   };
 
   const cardCss: CSSProperties = {
     width: "100%",
-    height: "100%",
   };
 
   return (

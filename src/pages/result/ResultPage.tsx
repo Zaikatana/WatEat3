@@ -1,5 +1,5 @@
 import { MDBCol, MDBContainer, MDBRow, MDBSpinner } from "mdb-react-ui-kit";
-import React, { CSSProperties } from "react";
+import React from "react";
 import { Business } from "../../services/types/business.type";
 import { ResultCard } from "./components/ResultCard";
 import { ResultMap } from "./components/ResultMap";
@@ -25,32 +25,21 @@ export const ResultPage: React.FC<ResultPageProps> = (props) => {
       <></>
     );
 
-  const containerCss: CSSProperties = {
-    minHeight: "100%",
-    height: "94vh",
-    minWidth: "100%",
-  };
-
   return (
     <MDBContainer fluid>
       {isLoading ? (
-        <div
-          className="border d-flex align-items-center justify-content-center"
-          style={containerCss}
-        >
+        <div className="border d-flex align-items-center justify-content-center">
           <MDBSpinner grow>
             <span className="visually-hidden">Loading...</span>
           </MDBSpinner>
         </div>
       ) : (
-        <div style={containerCss}>
-          <MDBRow>
-            <MDBCol md="3">{currCard}</MDBCol>
-            <MDBCol md="9">
-              <ResultMap center={center} />
-            </MDBCol>
-          </MDBRow>
-        </div>
+        <MDBRow>
+          <MDBCol md="4">{currCard}</MDBCol>
+          <MDBCol md="8">
+            <ResultMap center={center} />
+          </MDBCol>
+        </MDBRow>
       )}
     </MDBContainer>
   );

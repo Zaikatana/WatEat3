@@ -19,6 +19,7 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
     lat: 0,
     lng: 0,
   });
+  const [showAlert, setShowAlert] = useState<boolean>(true);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -37,6 +38,10 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
   const setRadiusHandler = (radius: number) => {
     setRadius(radius);
   };
+
+  const setShowAlertHandler = () => {
+    setShowAlert(false);
+  }
 
   const formSubmitHandler = async (cuisines: Cuisine[]) => {
     setIsLoadingHandler(true);
@@ -63,6 +68,8 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
       setRadiusHandler={setRadiusHandler}
       setModeHandler={setModeHandler}
       radius={radius}
+      showAlert={showAlert}
+      setShowAlertHandler={setShowAlertHandler}
     />
   );
 };
