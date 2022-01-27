@@ -1,10 +1,10 @@
 import React from "react";
-import { Cuisine } from "./Cuisine";
 import { SearchForm } from "./components/SearchForm";
 import { MDBContainer } from "mdb-react-ui-kit";
+import { Category } from "../../services/types/category.type";
 
 type MainPageProps = {
-  formSubmitHandler(cuisines: Cuisine[]): void;
+  formSubmitHandler(categories: Category[]): void;
   setModeHandler(): void;
   setRadiusHandler(radius: number): void;
   radius: number;

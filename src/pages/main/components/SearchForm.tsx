@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Select from "react-dropdown-select";
-import { Cuisine, cuisines } from "../Cuisine";
 import {
   MDBBtn,
   MDBCheckbox,
@@ -9,9 +8,10 @@ import {
   MDBRange,
   MDBRow,
 } from "mdb-react-ui-kit";
+import { categories, Category } from "../../../services/types/category.type";
 
 type SearchFormProps = {
-  formSubmitHandler(cuisines: Cuisine[]): void;
+  formSubmitHandler(categories: Category[]): void;
   setModeHandler(): void;
   setRadiusHandler(radius: number): void;
   radius: number;
@@ -19,7 +19,7 @@ type SearchFormProps = {
 
 export const SearchForm: React.FC<SearchFormProps> = (props) => {
   const { formSubmitHandler, setModeHandler, setRadiusHandler, radius } = props;
-  const [values, setValues] = useState<Cuisine[]>([]);
+  const [values, setValues] = useState<Category[]>([]);
 
   return (
     <>
@@ -29,14 +29,14 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
             <Select
               multi
               placeholder="Select Cuisines..."
-              options={cuisines}
+              options={categories}
               onChange={(values) => setValues(values)}
               values={values}
-              labelField="cuisine_name"
-              valueField="cuisine_id"
+              labelField="title"
+              valueField="alias"
               closeOnSelect={true}
               keepSelectedInList={false}
-              searchBy="cuisine_name"
+              searchBy="title"
               dropdownHandle={false}
             />
           </MDBCol>

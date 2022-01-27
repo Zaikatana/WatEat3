@@ -12,4 +12,15 @@ export class YelpService {
       },
     });
   }
+
+  static createYelpCategoryInstance(): AxiosInstance {
+    return axios.create({
+      baseURL:
+        "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/categories",
+      headers: {
+        Authorization: `Bearer ${REACT_APP_YELP_KEY}`,
+        origin: "localhost:3000/*",
+      },
+    });
+  }
 }

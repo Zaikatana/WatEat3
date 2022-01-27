@@ -1,8 +1,8 @@
 import { AxiosInstance } from "axios";
 import React, { useEffect, useState } from "react";
 import { Business } from "../../services/types/business.type";
+import { Category } from "../../services/types/category.type";
 import { YelpService } from "../../services/YelpService";
-import { Cuisine } from "./Cuisine";
 import { MainPage } from "./MainPage";
 
 type MainPageContainerProps = {
@@ -12,7 +12,6 @@ type MainPageContainerProps = {
 
 export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
   const { setBusinessListHandler, setIsLoadingHandler } = props;
-  const yelpService: AxiosInstance = YelpService.createYelpBusinessInstance();
   const [mode, setMode] = useState<boolean>(false);
   const [radius, setRadius] = useState<number>(1);
   const [currPos, setCurrPos] = useState<{ lat: number; lng: number }>({
@@ -29,7 +28,7 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
       };
       setCurrPos(currentPosition);
     });
-  });
+  }, []);
 
   const setModeHandler = () => {
     setMode(!mode);
@@ -41,25 +40,30 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
 
   const setShowAlertHandler = () => {
     setShowAlert(false);
-  }
+  };
 
-  const formSubmitHandler = async (cuisines: Cuisine[]) => {
+  const formSubmitHandler = async (categories: Category[]) => {
     setIsLoadingHandler(true);
-    yelpService.get("/search", {
-      params: {
-        latitude: currPos.lat,
-        longitude: currPos.lng,
-        radius: radius * 1000,
-        categories: "food",
-        limit: 10,
-        sort_by: "rating",
-        price: mode ? "1, 2" : "1, 2, 3, 4",
-        open_now: true,
-      },
-    }).then((response) => {
-      setBusinessListHandler(response.data.businesses as Business[]);
-      setIsLoadingHandler(false);
-    });
+    const categoriesString = categories.join(",");
+    const yelpBusinessService: AxiosInstance =
+      YelpService.createYelpBusinessInstance();
+    yelpBusinessService
+      .get("/search", {
+        params: {
+          latitude: currPos.lat,
+          longitude: currPos.lng,
+          radius: radius * 1000,
+          categories: categories.length > 0 ? categoriesString : "food",
+          limit: 10,
+          sort_by: "rating",
+          price: mode ? "1, 2" : "1, 2, 3, 4",
+          open_now: true,
+        },
+      })
+      .then((response) => {
+        setBusinessListHandler(response.data.businesses as Business[]);
+        setIsLoadingHandler(false);
+      });
   };
 
   return (
