@@ -5,12 +5,13 @@ import { ResultPage } from "./ResultPage";
 type ResultPageContainerProps = {
   businessList: Business[];
   isLoading: boolean;
+  currPos: { lat: number; lng: number };
 };
 
 export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
   props
 ) => {
-  const { businessList, isLoading } = props;
+  const { businessList, isLoading, currPos } = props;
   const [center, setCenter] = useState<{ lat: number; lng: number }>({
     lat: 0,
     lng: 0,
@@ -22,12 +23,12 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
     const { latitude, longitude } =
       businessList.length > 0
         ? businessList[0].coordinates
-        : { latitude: 0, longitude: 0 };
+        : { latitude: currPos.lat, longitude: currPos.lng };
     setCenter({
       lat: latitude,
       lng: longitude,
     });
-  }, [businessList]);
+  }, [businessList, currPos]);
 
   const updateMapCenter = (lat: number, lng: number) => {
     setCenter({

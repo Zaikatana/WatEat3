@@ -1,6 +1,6 @@
 import React from "react";
 import { SearchForm } from "./components/SearchForm";
-import { MDBContainer } from "mdb-react-ui-kit";
+import { MDBContainer, MDBIcon } from "mdb-react-ui-kit";
 import { Category } from "../../services/types/category.type";
 
 type MainPageProps = {
@@ -10,6 +10,7 @@ type MainPageProps = {
   radius: number;
   showAlert: boolean;
   setShowAlertHandler(): void;
+  positionLoading: boolean;
 };
 
 export const MainPage: React.FC<MainPageProps> = (props) => {
@@ -20,6 +21,7 @@ export const MainPage: React.FC<MainPageProps> = (props) => {
     radius,
     showAlert,
     setShowAlertHandler,
+    positionLoading,
   } = props;
 
   return (
@@ -30,7 +32,7 @@ export const MainPage: React.FC<MainPageProps> = (props) => {
           role="alert"
         >
           <MDBContainer fluid>
-            Before using, please access{" "}
+            <MDBIcon fas icon="exclamation-circle" /> Before using, please access{" "}
             <a
               href="https://cors-anywhere.herokuapp.com/corsdemo"
               className="alert-link"
@@ -61,6 +63,7 @@ export const MainPage: React.FC<MainPageProps> = (props) => {
         setModeHandler={setModeHandler}
         setRadiusHandler={setRadiusHandler}
         radius={radius}
+        positionLoading={positionLoading}
       />
     </MDBContainer>
   );

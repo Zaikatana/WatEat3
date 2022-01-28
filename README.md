@@ -1,46 +1,18 @@
-# Getting Started with Create React App
+# WatEat
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was developed with a TypeScript and ReactJS stack. It utilises the Yelp Fusion & Google Maps APIs to search for open restaurants in a user defined radius.
 
-## Available Scripts
+## Purpose
+This web application was built with the purpose of allowing users to search for places to eat. The places appear as cards and users can choose to pass on places to view the next available option.
 
-In the project directory, you can run:
+While this project is still very much a work in progress (UI could be better, Mobile support, CORS bypassing, performing a request to retrieve categories, etc.), it has pretty much reached a Minimal Viable Product (MVP) status.
 
-### `yarn start`
+This web application is built as a fun and non-profitable project to add to Brian Luc's (the Author) portfolio.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
+- Search for Open restaurants in a user defined radius
+- View location of restaurant in a map
+- Browse through a list of restaurants
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Third-Party Libraries used
+- [react-google-maps/api] - React Component to streamline the use of the google maps api (https://github.com/JustFly1984/react-google-maps-api)

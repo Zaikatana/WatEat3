@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Business } from "../../services/types/business.type";
 import { Category } from "../../services/types/category.type";
 import { YelpService } from "../../services/YelpService";
@@ -8,27 +8,16 @@ import { MainPage } from "./MainPage";
 type MainPageContainerProps = {
   setBusinessListHandler: (businessList: Business[]) => void;
   setIsLoadingHandler: (bool: boolean) => void;
+  currPos: { lat: number; lng: number };
+  positionLoading: boolean;
 };
 
 export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
-  const { setBusinessListHandler, setIsLoadingHandler } = props;
+  const { setBusinessListHandler, setIsLoadingHandler, currPos, positionLoading } = props;
   const [mode, setMode] = useState<boolean>(false);
   const [radius, setRadius] = useState<number>(1);
-  const [currPos, setCurrPos] = useState<{ lat: number; lng: number }>({
-    lat: 0,
-    lng: 0,
-  });
-  const [showAlert, setShowAlert] = useState<boolean>(true);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const currentPosition = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-      setCurrPos(currentPosition);
-    });
-  }, []);
+  const [showAlert, setShowAlert] = useState<boolean>(true);
 
   const setModeHandler = () => {
     setMode(!mode);
@@ -44,7 +33,11 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
 
   const formSubmitHandler = async (categories: Category[]) => {
     setIsLoadingHandler(true);
-    const categoriesString = categories.join(",");
+    const categoriesString = categories
+      .map((category) => {
+        return category.alias;
+      })
+      .join(",");
     const yelpBusinessService: AxiosInstance =
       YelpService.createYelpBusinessInstance();
     yelpBusinessService
@@ -54,7 +47,7 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
           longitude: currPos.lng,
           radius: radius * 1000,
           categories: categories.length > 0 ? categoriesString : "food",
-          limit: 10,
+          limit: 20,
           sort_by: "rating",
           price: mode ? "1, 2" : "1, 2, 3, 4",
           open_now: true,
@@ -74,6 +67,7 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
       radius={radius}
       showAlert={showAlert}
       setShowAlertHandler={setShowAlertHandler}
+      positionLoading={positionLoading}
     />
   );
 };

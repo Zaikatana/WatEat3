@@ -15,10 +15,11 @@ type SearchFormProps = {
   setModeHandler(): void;
   setRadiusHandler(radius: number): void;
   radius: number;
+  positionLoading: boolean;
 };
 
 export const SearchForm: React.FC<SearchFormProps> = (props) => {
-  const { formSubmitHandler, setModeHandler, setRadiusHandler, radius } = props;
+  const { formSubmitHandler, setModeHandler, setRadiusHandler, radius, positionLoading } = props;
   const [values, setValues] = useState<Category[]>([]);
 
   return (
@@ -61,6 +62,7 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
               id="mode"
               onChange={() => setModeHandler()}
               label="Student Mode"
+              disabled={positionLoading}
             />
           </MDBCol>
           <MDBCol>
