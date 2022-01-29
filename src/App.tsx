@@ -7,7 +7,7 @@ export const App: React.FC = () => {
     <div className="App">
       <MDBNavbar expand="lg" light bgColor="white">
         <MDBContainer fluid>
-        <MDBNavbarBrand href='/'>WatEat?</MDBNavbarBrand>
+        <MDBNavbarBrand href='/wateat'>WatEat?</MDBNavbarBrand>
         </MDBContainer>
       </MDBNavbar>
       <PageRouter />

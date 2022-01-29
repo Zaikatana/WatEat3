@@ -15,11 +15,11 @@ export const PageRouter: React.FC = () => {
 
   const setBusinessListHandler = (businessList: Business[]) => {
     setBusinessList([...businessList]);
-  }
+  };
 
   const setIsLoadingHandler = (bool: boolean) => {
     setIsLoading(bool);
-  }
+  };
 
   useEffect(() => {
     setPositionLoading(true);
@@ -37,7 +37,7 @@ export const PageRouter: React.FC = () => {
     <Router>
       <Routes>
         <Route
-          path="/"
+          path="/wateat"
           element={
             <MainPageContainer
               setBusinessListHandler={setBusinessListHandler}
@@ -48,7 +48,7 @@ export const PageRouter: React.FC = () => {
           }
         />
         <Route
-          path="/result"
+          path="/wateat/result"
           element={
             <ResultPageContainer
               businessList={businessList}

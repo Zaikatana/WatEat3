@@ -66,7 +66,7 @@ export const SearchForm: React.FC<SearchFormProps> = (props) => {
             />
           </MDBCol>
           <MDBCol>
-            <Link to="/result">
+            <Link to="/wateat/result">
               <MDBBtn
                 name="button"
                 className="float-end"
