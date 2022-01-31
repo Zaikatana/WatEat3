@@ -47,14 +47,15 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
           longitude: currPos.lng,
           radius: radius * 1000,
           categories: categories.length > 0 ? categoriesString : "food",
-          limit: 20,
+          limit: 50,
           sort_by: "rating",
           price: mode ? "1, 2" : "1, 2, 3, 4",
           open_now: true,
         },
       })
       .then((response) => {
-        setBusinessListHandler(response.data.businesses as Business[]);
+        const randArr = response.data.businesses.sort(() => Math.random() - 0.5);
+        setBusinessListHandler(randArr.slice(0,20) as Business[]);
         setIsLoadingHandler(false);
       });
   };
