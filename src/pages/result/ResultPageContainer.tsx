@@ -17,7 +17,8 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
     lng: 0,
   });
   const [cards, setCards] = useState<Business[]>(businessList);
-  
+  const [likeList, setLikeList] = useState<Business[]>([]);
+
   useEffect(() => {
     setCards([...businessList]);
     const { latitude, longitude } =
@@ -41,12 +42,18 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
     cards.shift();
     setCards([...cards]);
     if (cards.length > 0) {
-      // TODO: When Yelp Service is implemented, we want to get 10 more cards instead
+      // TODO: When Yelp Service is implemented, we want to offer option to get 10 more cards instead
       updateMapCenter(
         cards[0].coordinates.latitude,
         cards[0].coordinates.longitude
       );
     }
+  };
+
+  const addToLikeList = (business: Business) => {
+    likeList.push(business);
+    setLikeList([...likeList]);
+    swipeCard();
   };
 
   return (
@@ -55,6 +62,8 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
       businesses={cards}
       isLoading={isLoading}
       swipeCard={swipeCard}
+      likeList={likeList}
+      addToLikeList={addToLikeList}
     />
   );
 };

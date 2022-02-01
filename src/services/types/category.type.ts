@@ -501,13 +501,6 @@ export const categories: Category[] = [
     country_blacklist: ["CZ", "MX", "SG", "TR"],
   },
   {
-    alias: "ethnicgrocery",
-    title: "Ethnic Grocery",
-    parent_aliases: ["food"],
-    country_whitelist: [],
-    country_blacklist: [],
-  },
-  {
     alias: "farmersmarket",
     title: "Farmers Market",
     parent_aliases: ["food"],
@@ -689,13 +682,6 @@ export const categories: Category[] = [
     country_blacklist: [],
   },
   {
-    alias: "grocery",
-    title: "Grocery",
-    parent_aliases: ["food"],
-    country_whitelist: [],
-    country_blacklist: [],
-  },
-  {
     alias: "guamanian",
     title: "Guamanian",
     parent_aliases: ["restaurants"],
@@ -782,13 +768,6 @@ export const categories: Category[] = [
   {
     alias: "internetcafe",
     title: "Internet Cafes",
-    parent_aliases: ["food"],
-    country_whitelist: [],
-    country_blacklist: [],
-  },
-  {
-    alias: "intlgrocery",
-    title: "International Grocery",
     parent_aliases: ["food"],
     country_whitelist: [],
     country_blacklist: [],
