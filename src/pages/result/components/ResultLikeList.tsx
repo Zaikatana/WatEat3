@@ -5,22 +5,25 @@ import { ResultLikeCard } from "./ResultCard";
 
 type ResultLikeListProps = {
   likeList: Business[];
+  updateMapCenter: (lat: number, lng: number) => void;
 };
 
 export const ResultLikeList: React.FC<ResultLikeListProps> = (props) => {
-  const { likeList } = props;
+  const { likeList, updateMapCenter } = props;
 
   const containerStyle: CSSProperties = {
     width: "100%",
-    height: "94vh",
-    overflowY: "scroll",
+    height: "90vh",
+    overflowY: "auto",
   };
 
   const content =
     likeList.length > 0 ? (
       <>
         {likeList.map((business) => {
-          return <ResultLikeCard business={business} />;
+          return (
+            <ResultLikeCard business={business} updateMapCenter={updateMapCenter} />
+          );
         })}
       </>
     ) : (

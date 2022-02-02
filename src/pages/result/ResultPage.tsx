@@ -17,10 +17,11 @@ type ResultPageProps = {
   isLoading: boolean;
   addToLikeList: (business: Business) => void;
   likeList: Business[];
+  updateMapCenter: (lat: number, lng: number) => void;
 };
 
 export const ResultPage: React.FC<ResultPageProps> = (props) => {
-  const { center, businesses, swipeCard, isLoading, addToLikeList, likeList } =
+  const { center, businesses, swipeCard, isLoading, addToLikeList, likeList, updateMapCenter } =
     props;
 
   const containerStyle = {
@@ -47,6 +48,7 @@ export const ResultPage: React.FC<ResultPageProps> = (props) => {
               swipeCard={swipeCard}
               likeList={likeList}
               addToLikeList={addToLikeList}
+              updateMapCenter={updateMapCenter}
             />
           </MDBCol>
           <MDBCol md="8">

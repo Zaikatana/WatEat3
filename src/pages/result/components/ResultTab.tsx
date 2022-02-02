@@ -17,13 +17,21 @@ type ResultTabProps = {
   swipeCard: () => void;
   addToLikeList: (business: Business) => void;
   likeList: Business[];
+  updateMapCenter: (lat: number, lng: number) => void;
 };
 
 export const ResultTab: React.FC<ResultTabProps> = (props) => {
   const [basicActive, setBasicActive] = useState<string>("tab1");
-  const { businesses, swipeCard, likeList, addToLikeList } = props;
+  const { businesses, swipeCard, likeList, addToLikeList, updateMapCenter } =
+    props;
 
   const handleBasicClick = (value: string) => {
+    if (value === "tab1" && businesses.length > 0) {
+      updateMapCenter(
+        businesses[0].coordinates.latitude,
+        businesses[0].coordinates.longitude
+      );
+    }
     if (value === basicActive) {
       return;
     }
@@ -80,7 +88,10 @@ export const ResultTab: React.FC<ResultTabProps> = (props) => {
       <MDBTabsContent>
         <MDBTabsPane show={basicActive === "tab1"}>{currCard}</MDBTabsPane>
         <MDBTabsPane show={basicActive === "tab2"}>
-          <ResultLikeList likeList={likeList} />
+          <ResultLikeList
+            likeList={likeList}
+            updateMapCenter={updateMapCenter}
+          />
         </MDBTabsPane>
       </MDBTabsContent>
     </>

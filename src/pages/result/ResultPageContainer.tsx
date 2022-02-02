@@ -64,6 +64,7 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
       swipeCard={swipeCard}
       likeList={likeList}
       addToLikeList={addToLikeList}
+      updateMapCenter={updateMapCenter}
     />
   );
 };

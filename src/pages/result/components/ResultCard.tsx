@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import {
   MDBBtn,
   MDBCard,
@@ -8,6 +9,7 @@ import {
   MDBCardTitle,
   MDBCol,
   MDBIcon,
+  MDBRipple,
   MDBRow,
   MDBTable,
   MDBTableBody,
@@ -94,59 +96,80 @@ export const ResultCard: React.FC<ResultCardProps> = (props) => {
 
 type ResultLikeCardProps = {
   business: Business;
+  updateMapCenter: (lat: number, lng: number) => void;
 };
 
 export const ResultLikeCard: React.FC<ResultLikeCardProps> = (props) => {
-  const { business } = props;
+  const { business, updateMapCenter } = props;
   const cardCategories = business.categories.map((category) => {
     return category.title;
   });
 
   return (
-    <MDBCard>
-      <MDBRow className="g-0">
-        <MDBCol md="4">
-          <MDBCardImage src={business.image_url} alt="..." fluid />
-        </MDBCol>
-        <MDBCol md="8">
-          <MDBCardBody>
-            <MDBCardTitle>{business.name}</MDBCardTitle>
-            <MDBCardSubTitle>
-              {business.location.display_address.join(", ")}
-            </MDBCardSubTitle>
-            <MDBCardText className="text-muted">
-              <MDBTable borderless>
-                <MDBTableBody>
-                  <tr>
-                    <th scope="row">Distance</th>
-                    <td>{(business.distance / 1000).toFixed(2)}km away</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Rating</th>
-                    <td>{business.rating}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Contact Number</th>
-                    <td>
-                      {business.display_phone === ""
-                        ? "N/A"
-                        : business.display_phone}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Price</th>
-                    <td>{business.price}</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Cuisine</th>
-                    <td>{cardCategories.join(", ")}</td>
-                  </tr>
-                </MDBTableBody>
-              </MDBTable>
-            </MDBCardText>
-          </MDBCardBody>
-        </MDBCol>
-      </MDBRow>
+    <MDBCard
+      onClick={() =>
+        updateMapCenter(
+          business.coordinates.latitude,
+          business.coordinates.longitude
+        )
+      }
+      key={business.id}
+    >
+      <a href="#">
+        <MDBRipple
+          rippleColor="light"
+          rippleTag="div"
+          className="bg-image hover-overlay"
+        >
+          <MDBRow className="g-0 mb-2">
+            <MDBCol md="4">
+              <MDBCardImage src={business.image_url} alt="..." fluid />
+            </MDBCol>
+            <MDBCol md="8">
+              <MDBCardBody>
+                <MDBCardTitle>{business.name}</MDBCardTitle>
+                <MDBCardSubTitle>
+                  {business.location.display_address.join(", ")}
+                </MDBCardSubTitle>
+                <MDBCardText className="text-muted">
+                  <MDBTable borderless>
+                    <MDBTableBody>
+                      <tr>
+                        <th scope="row">Distance</th>
+                        <td>{(business.distance / 1000).toFixed(2)}km away</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Rating</th>
+                        <td>{business.rating}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Contact Number</th>
+                        <td>
+                          {business.display_phone === ""
+                            ? "N/A"
+                            : business.display_phone}
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Price</th>
+                        <td>{business.price}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Cuisine</th>
+                        <td>{cardCategories.join(", ")}</td>
+                      </tr>
+                    </MDBTableBody>
+                  </MDBTable>
+                </MDBCardText>
+              </MDBCardBody>
+            </MDBCol>
+          </MDBRow>
+          <div
+            className="mask"
+            style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
+          />
+        </MDBRipple>
+      </a>
     </MDBCard>
   );
 };
