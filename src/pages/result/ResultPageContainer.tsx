@@ -18,6 +18,7 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
   });
   const [cards, setCards] = useState<Business[]>(businessList);
   const [likeList, setLikeList] = useState<Business[]>([]);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     setCards([...businessList]);
@@ -29,7 +30,10 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
       lat: latitude,
       lng: longitude,
     });
-  }, [businessList, currPos]);
+    setIsMobile(
+      window.matchMedia("only screen and (max-width: 760px)").matches
+    );
+  }, [businessList, currPos, isMobile]);
 
   const updateMapCenter = (lat: number, lng: number) => {
     setCenter({
@@ -65,6 +69,7 @@ export const ResultPageContainer: React.FC<ResultPageContainerProps> = (
       likeList={likeList}
       addToLikeList={addToLikeList}
       updateMapCenter={updateMapCenter}
+      isMobile={isMobile}
     />
   );
 };

@@ -1,10 +1,5 @@
 /* eslint-disable react/jsx-no-undef */
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBSpinner,
-} from "mdb-react-ui-kit";
+import { MDBCol, MDBContainer, MDBRow, MDBSpinner } from "mdb-react-ui-kit";
 import React from "react";
 import { Business } from "../../services/types/business.type";
 import { ResultMap } from "./components/ResultMap";
@@ -18,11 +13,20 @@ type ResultPageProps = {
   addToLikeList: (business: Business) => void;
   likeList: Business[];
   updateMapCenter: (lat: number, lng: number) => void;
+  isMobile: boolean;
 };
 
 export const ResultPage: React.FC<ResultPageProps> = (props) => {
-  const { center, businesses, swipeCard, isLoading, addToLikeList, likeList, updateMapCenter } =
-    props;
+  const {
+    center,
+    businesses,
+    swipeCard,
+    isLoading,
+    addToLikeList,
+    likeList,
+    updateMapCenter,
+    isMobile,
+  } = props;
 
   const containerStyle = {
     width: "100%",
@@ -51,9 +55,11 @@ export const ResultPage: React.FC<ResultPageProps> = (props) => {
               updateMapCenter={updateMapCenter}
             />
           </MDBCol>
-          <MDBCol md="8">
-            <ResultMap center={center} />
-          </MDBCol>
+          {!isMobile && (
+            <MDBCol md="8">
+              <ResultMap center={center} />
+            </MDBCol>
+          )}
         </MDBRow>
       )}
     </MDBContainer>

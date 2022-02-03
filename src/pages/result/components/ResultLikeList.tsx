@@ -13,7 +13,7 @@ export const ResultLikeList: React.FC<ResultLikeListProps> = (props) => {
 
   const containerStyle: CSSProperties = {
     width: "100%",
-    height: "90vh",
+    height: "85vh",
     overflowY: "auto",
   };
 

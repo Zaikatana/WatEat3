@@ -101,19 +101,16 @@ type ResultLikeCardProps = {
 
 export const ResultLikeCard: React.FC<ResultLikeCardProps> = (props) => {
   const { business, updateMapCenter } = props;
-  /*const cardCategories = business.categories.map((category) => {
-    return category.title;
-  });*/
 
   const cardCss: CSSProperties = {
     width: "95%",
-    height: "10rem",
+    height: "20vh",
     cursor: "pointer",
   };
 
   const imgCss: CSSProperties = {
-    height: "10rem",
-    width: "10rem",
+    height: "20vh",
+    width: "20vh",
     objectFit: "contain",
     backgroundColor: "grey",
   };
@@ -151,10 +148,26 @@ export const ResultLikeCard: React.FC<ResultLikeCardProps> = (props) => {
                 {business.location.display_address.join(", ")}
               </MDBCardSubTitle>
               <MDBCardText className="text-muted">
-                <MDBIcon icon="star" /> 
-                <MDBIcon icon="walking" />
-                <MDBIcon icon="dollar-sign" />
-                <MDBIcon icon="phone-alt" />
+                <MDBRow>
+                  <MDBCol>
+                    <MDBIcon icon="walking" />{" "}
+                    {(business.distance / 1000).toFixed(2)}km away
+                  </MDBCol>
+                  <MDBCol>
+                    <MDBIcon icon="star" /> {business.rating}
+                  </MDBCol>
+                </MDBRow>
+                <MDBRow>
+                  <MDBCol>
+                    <MDBIcon icon="dollar-sign" /> {business.price}
+                  </MDBCol>
+                  <MDBCol>
+                    <MDBIcon icon="phone-alt" />{" "}
+                    {business.display_phone === ""
+                      ? "N/A"
+                      : business.display_phone}
+                  </MDBCol>
+                </MDBRow>
               </MDBCardText>
             </MDBCardBody>
           </MDBCol>
