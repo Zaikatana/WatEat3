@@ -101,9 +101,22 @@ type ResultLikeCardProps = {
 
 export const ResultLikeCard: React.FC<ResultLikeCardProps> = (props) => {
   const { business, updateMapCenter } = props;
-  const cardCategories = business.categories.map((category) => {
+  /*const cardCategories = business.categories.map((category) => {
     return category.title;
-  });
+  });*/
+
+  const cardCss: CSSProperties = {
+    width: "95%",
+    height: "10rem",
+    cursor: "pointer",
+  };
+
+  const imgCss: CSSProperties = {
+    height: "10rem",
+    width: "10rem",
+    objectFit: "contain",
+    backgroundColor: "grey",
+  };
 
   return (
     <MDBCard
@@ -114,62 +127,43 @@ export const ResultLikeCard: React.FC<ResultLikeCardProps> = (props) => {
         )
       }
       key={business.id}
+      style={cardCss}
+      className="mb-2"
     >
-      <a href="#">
-        <MDBRipple
-          rippleColor="light"
-          rippleTag="div"
-          className="bg-image hover-overlay"
-        >
-          <MDBRow className="g-0 mb-2">
-            <MDBCol md="4">
-              <MDBCardImage src={business.image_url} alt="..." fluid />
-            </MDBCol>
-            <MDBCol md="8">
-              <MDBCardBody>
-                <MDBCardTitle>{business.name}</MDBCardTitle>
-                <MDBCardSubTitle>
-                  {business.location.display_address.join(", ")}
-                </MDBCardSubTitle>
-                <MDBCardText className="text-muted">
-                  <MDBTable borderless>
-                    <MDBTableBody>
-                      <tr>
-                        <th scope="row">Distance</th>
-                        <td>{(business.distance / 1000).toFixed(2)}km away</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Rating</th>
-                        <td>{business.rating}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Contact Number</th>
-                        <td>
-                          {business.display_phone === ""
-                            ? "N/A"
-                            : business.display_phone}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Price</th>
-                        <td>{business.price}</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Cuisine</th>
-                        <td>{cardCategories.join(", ")}</td>
-                      </tr>
-                    </MDBTableBody>
-                  </MDBTable>
-                </MDBCardText>
-              </MDBCardBody>
-            </MDBCol>
-          </MDBRow>
-          <div
-            className="mask"
-            style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-          />
-        </MDBRipple>
-      </a>
+      <MDBRipple
+        rippleColor="light"
+        rippleTag="div"
+        className="bg-image hover-overlay"
+      >
+        <MDBRow className="g-0">
+          <MDBCol md="4">
+            <MDBCardImage
+              src={business.image_url}
+              alt="..."
+              fluid
+              style={imgCss}
+            />
+          </MDBCol>
+          <MDBCol md="8">
+            <MDBCardBody>
+              <MDBCardTitle>{business.name}</MDBCardTitle>
+              <MDBCardSubTitle>
+                {business.location.display_address.join(", ")}
+              </MDBCardSubTitle>
+              <MDBCardText className="text-muted">
+                <MDBIcon icon="star" /> 
+                <MDBIcon icon="walking" />
+                <MDBIcon icon="dollar-sign" />
+                <MDBIcon icon="phone-alt" />
+              </MDBCardText>
+            </MDBCardBody>
+          </MDBCol>
+        </MDBRow>
+        <div
+          className="mask"
+          style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
+        />
+      </MDBRipple>
     </MDBCard>
   );
 };

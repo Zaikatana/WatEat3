@@ -67,7 +67,7 @@ export const ResultTab: React.FC<ResultTabProps> = (props) => {
 
   return (
     <>
-      <MDBTabs>
+      <MDBTabs className="m-2">
         <MDBTabsItem>
           <MDBTabsLink
             onClick={() => handleBasicClick("tab1")}

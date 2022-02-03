@@ -48,7 +48,7 @@ export const MainPageContainer: React.FC<MainPageContainerProps> = (props) => {
           radius: radius * 1000,
           categories: categories.length > 0 ? categoriesString : "restaurants,food",
           price: mode ? "1, 2" : "1, 2, 3, 4",
-          open_now: true,
+          open_at: Math.floor(Date.now()/1000),
         },
       })
       .then((response) => {
